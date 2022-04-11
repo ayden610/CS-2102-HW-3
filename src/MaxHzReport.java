@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 class MaxHzReport {
     double date;
     double maxReading;
@@ -8,10 +10,8 @@ class MaxHzReport {
     }
 
     // the equals method for use in testing
-    public boolean equals(Object other)
-    {
-        if(!(other instanceof MaxHzReport))
-        {
+    public boolean equals(Object other) {
+        if (!(other instanceof MaxHzReport)) {
             return false;
         }
 
@@ -22,8 +22,12 @@ class MaxHzReport {
     }
 
     // the toString method so that reports display when tests fail
-    public String toString()
-    {
-        return "Report["+ date + ", " + maxReading + "]";
+    public String toString() {
+        return "Report[" + date + ", " + maxReading + "]";
+    }
+
+
+    public LinkedList<MaxHzReport> dailyMaxForMonth(LinkedList<Double> readings, int month) {
+        return null;
     }
 }
