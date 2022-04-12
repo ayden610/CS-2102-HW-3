@@ -29,5 +29,9 @@ public class EarthquakeExamples {
 
 }
 /*Subtasks
+Identify 8 digit numbers (dates)
+Identify months and days from dates
+Find highest frequency on each day
+return each day followed by highest frenquency for a given month
 
  */

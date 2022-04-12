@@ -27,7 +27,5 @@ class MaxHzReport {
     }
 
 
-    public LinkedList<MaxHzReport> dailyMaxForMonth(LinkedList<Double> readings, int month) {
-        return null;
-    }
+
 }
