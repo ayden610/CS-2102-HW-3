@@ -10,6 +10,50 @@ class Earthquake2 {
 
     public LinkedList<MaxHzReport> dailyMaxForMonth(LinkedList<Double> data,
                                                     int month) {
-        return null;
+        int i = 0;
+        int state = 0;
+        double date = 0;
+        boolean rightMonth = false;
+        double maxRead = 0;
+        boolean RepeatLap = false;
+        LinkedList<MaxHzReport> returnReport = new LinkedList<>();
+
+        for(i = 0; i < data.size(); ++i){
+            if(data.get(i) > 500){
+                state = 1;
+            }
+            if(0 <= data.get(i) && data.get(i) <= 500){
+                state = 2;
+            }
+            switch(state){
+                case(1):
+                {
+                    if(RepeatLap){
+                        returnReport.add(new MaxHzReport(date, maxRead));
+                    }
+                    maxRead = 0;
+                    int yearmonth = (int) (data.get(i) / 100);
+                    int year = (int) (data.get(i) / 10000);
+                    if(yearmonth == (month + (year * 100))){
+                        rightMonth = true;
+                        date = data.get(i);
+                    }else{
+                        rightMonth = false;
+                    }
+                    break;
+                }
+                case(2):
+                {
+                    double thisData = data.get(i);
+                    if(thisData > maxRead && rightMonth){
+                        maxRead = thisData;
+                    }
+                    break;
+                }
+
+            }
+        }
+        returnReport.add(new MaxHzReport(date, maxRead));
+        return returnReport;
     }
 }

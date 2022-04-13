@@ -12,23 +12,44 @@ class Earthquake1 {
                                                     int month) {
 
         LinkedList<MaxHzReport> returnlist = new LinkedList<>();
-        for(Double value : data) {
-            if (value / 1000 >= 1) { //checks if the value is over 1000
-                //it is assumed that only dates are more than 1000 as readings go to 500
-                Double valuecopy = new Double(value);
-                int valueint = valuecopy.intValue();
-                String value_str = Integer.toString(valueint);
-                int newvalue = Integer.parseInt(value_str.substring(4));
-                //takes a date and gets rid of the year
-                int Dday = Integer.parseInt(value_str.substring(6));
-                //parses to the 7th digit on (day in the date)
-                int Dmonth = (newvalue - Dday) / 100;
-                if(Dmonth == month){
-                    //write day, search through data
-                } //else skip this step
+        double dayStored = 0;
+        double monthStored = 0;
+        double yearStored = 0;
+        double biggestRead = 0;
+        double dateStored = 0;
+        boolean dataMatters = false;
+        int i = 0;
+        for(i = 0; i < data.size(); ++i) {
+            double currData = data.get(i);
+            if (currData > 500) {
+                if(yearStored > 0 && dataMatters == true) { //skips first cycle
+                    dateStored = (yearStored * 10000) + (monthStored * 100) + (dayStored);
+                    returnlist.add(new MaxHzReport(dateStored, biggestRead));
+                }
+
+                biggestRead = 0; //reset biggest read for new date;
+
+                double copyData = currData;
+                yearStored = Math.floor(copyData / 10000);
+                monthStored = Math.floor((currData - (yearStored * 10000)) / 100);
+                dayStored = Math.floor((currData - (yearStored * 10000) - (monthStored * 100)));
+
+
+                if(monthStored == 11){
+                    dataMatters = true;
+                } else { dataMatters = false; }
+            }
+            if(dataMatters && currData <= 500){
+                if(currData > biggestRead){
+                    biggestRead = currData;
+                }
             }
         }
-        return null;
+        if(yearStored > 0 && dataMatters == true) { //skips first cycle
+            dateStored = (yearStored * 10000) + (monthStored * 100) + (dayStored);
+            returnlist.add(new MaxHzReport(dateStored, biggestRead));
+        }
+        return returnlist;
     }
 }
 

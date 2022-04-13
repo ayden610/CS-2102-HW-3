@@ -3,7 +3,7 @@ import org.junit.Test;
 import java.util.LinkedList;
 
 public class EarthquakeExamples {
-    Earthquake1 E1 = new Earthquake1();
+    Earthquake2 E1 = new Earthquake2();
     LinkedList<Double> noData = new LinkedList<Double>();
     LinkedList<Double> threeDates = new LinkedList<Double>();
     LinkedList<MaxHzReport> NovReports = new LinkedList<MaxHzReport>();
@@ -29,9 +29,8 @@ public class EarthquakeExamples {
 
 }
 /*Subtasks
-Identify 8 digit numbers (dates)
-Identify months and days from dates
-Find highest frequency on each day
-return each day followed by highest frenquency for a given month
-
+-Identify 8-digit numbers (dates)
+-Determine if the dates are in the correct month
+-cycle through data until next date for highest reading
+-Create a Report with the date and readings
  */
